@@ -80,10 +80,14 @@
                     <td>{{entity.linkmanName}}</td>
                     <td>{{entity.telephone}}</td>
                     <td>
-                        <span>未审核</span>
+                        <span ng-if="entity.status == '0'">未审核</span>
+                        <span ng-if="entity.status == '1'">审核通过</span>
+                        <span ng-if="entity.status == '2'">审核未通过</span>
+                        <span ng-if="entity.status == '3'">关闭商家</span>
                     </td>
                     <td class="text-center">
-                        <button type="button" ng-click="findOne(entity.sellerId)"  class="btn bg-olive btn-xs" data-toggle="modal"
+                        <button type="button" ng-click="findOne(entity.sellerId)" class="btn bg-olive btn-xs"
+                                data-toggle="modal"
                                 data-target="#sellerModal">详情
                         </button>
                     </td>
@@ -214,9 +218,18 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">审核通过</button>
-                    <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">审核未通过</button>
-                    <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">关闭商家</button>
+                    <button class="btn btn-primary" ng-if="entity.status == '0'" data-dismiss="modal"
+                            aria-hidden="true">未审核
+                    </button>
+                    <button class="btn btn-success" ng-if="entity.status == '1'" data-dismiss="modal"
+                            aria-hidden="true">审核通过
+                    </button>
+                    <button class="btn btn-danger" ng-if="entity.status == '2'" data-dismiss="modal" aria-hidden="true">
+                        审核未通过
+                    </button>
+                    <button class="btn btn-danger" ng-if="entity.status == '3'" data-dismiss="modal" aria-hidden="true">
+                        关闭商家
+                    </button>
                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
                 </div>
             </div>
